@@ -1,0 +1,123 @@
+.hero{
+
+height:300vh;
+
+background:
+linear-gradient(
+135deg,
+#0f172a,
+#111827,
+#1e293b,
+#0284c7
+);
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+.canvas-container{
+
+position:sticky;
+
+top:0;
+
+height:100vh;
+
+}
+
+
+.title{
+
+position:absolute;
+
+top:80px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+text-align:center;
+
+color:white;
+
+z-index:100;
+
+}
+
+
+.title h1{
+
+font-size:80px;
+
+letter-spacing:6px;
+
+font-weight:700;
+
+}
+
+
+.title p{
+
+font-size:24px;
+
+opacity:.8;
+
+}
+.hero{
+    height:400vh;
+
+    background:
+    linear-gradient(
+    135deg,
+    #020617,
+    #111827,
+    #1e293b,
+    #0c4a6e);
+
+    position:relative;
+}
+
+.canvas-container{
+
+    position:sticky;
+
+    top:0;
+
+    height:100vh;
+}
+.title{
+
+position:absolute;
+
+top:80px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+color:white;
+
+z-index:100;
+
+text-align:center;
+
+}
+
+.title h1{
+
+font-size:80px;
+
+letter-spacing:5px;
+
+}
+
+.title p{
+
+font-size:22px;
+
+opacity:.8;
+
+}
