@@ -131,7 +131,7 @@ export default function HotspotsOverlay({ onSelectPart, selectedPart }) {
   }, []);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 w-full h-full z-30 pointer-events-none">
+    <div ref={containerRef} className="absolute inset-0 w-full h-full z-30 pointer-events-none">
       {partsData.map((part) => (
         <div
           key={part.id}
@@ -140,11 +140,20 @@ export default function HotspotsOverlay({ onSelectPart, selectedPart }) {
             e.stopPropagation();
             onSelectPart(part);
           }}
-          className="absolute w-24 h-24 sm:w-32 sm:h-32 -translate-x-1/2 -translate-y-1/2 rounded-full cursor-pointer pointer-events-auto flex flex-col items-center justify-center group"
+          className="absolute w-[15vw] sm:w-[10vw] h-[50vh] sm:h-[70vh] -translate-x-1/2 -translate-y-1/2 rounded-[3rem] cursor-pointer pointer-events-auto flex flex-col items-center justify-center group"
         >
           {/* Extremely subtle, elegant premium indicator */}
           <div className="w-6 h-6 rounded-full border border-white/20 bg-white/5 backdrop-blur-md transition-all duration-500 ease-out group-hover:scale-[1.5] group-hover:border-white/60 group-hover:bg-white/10 flex items-center justify-center">
             <div className="w-1 h-1 rounded-full bg-white/40 group-hover:bg-white/80 transition-colors duration-500"></div>
+          </div>
+          
+          {/* Creative visible label for users who don't know it's clickable */}
+          <div className={`mt-4 whitespace-nowrap opacity-70 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-300 pointer-events-none scale-125 origin-top ${selectedPart?.id === part.id ? 'hidden' : 'block'}`}>
+             <div className="bg-black/40 backdrop-blur-md border border-white/10 text-white/90 text-[10px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow-lg flex items-center gap-2">
+               <span>{part.title}</span>
+               <div className="w-4 h-[1px] bg-white/30 hidden sm:block"></div>
+               <span className="text-cyan-400 font-extrabold text-[9px] hidden sm:block animate-pulse">CLICK</span>
+             </div>
           </div>
           <AnimatePresence>
             {selectedPart?.id === part.id && (

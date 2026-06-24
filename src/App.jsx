@@ -65,15 +65,25 @@ function App() {
   return (
     <main ref={mainRef} className="relative w-full overflow-x-hidden font-sans">
       
+      {/* Global Presentation Frame - Elegantly Blended */}
+      <div className="fixed inset-2 sm:inset-4 md:inset-6 border-2 border-slate-800/60 rounded-[3rem] md:rounded-[4rem] pointer-events-none z-[100] shadow-[0_0_60px_rgba(0,0,0,0.9)_inset,0_0_20px_rgba(34,211,238,0.05)]"></div>
+      <div className="fixed inset-2 sm:inset-4 md:inset-6 border border-white/5 rounded-[3rem] md:rounded-[4rem] pointer-events-none z-[100] mix-blend-overlay"></div>
+
       <AnimatePresence>
         {!introFinished && <IntroLoader onComplete={() => setIntroFinished(true)} />}
       </AnimatePresence>
 
-      {/* Background HTML5 Canvas for Image Sequence - Fixed in background */}
-      <ImageSequence />
-
-      {/* Global Interactive Hotspots - tracks the camera parts */}
-      <HotspotsOverlay onSelectPart={setSelectedPart} selectedPart={selectedPart} />
+      {/* Background HTML5 Canvas and Hotspots */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        {/* Canvas remains full screen so its background doesn't clip */}
+        <div className="absolute inset-0">
+          <ImageSequence />
+        </div>
+        {/* Hotspots are mathematically scaled by 0.8 to match the internal camera scale */}
+        <div className="absolute inset-0 scale-[0.8] origin-center">
+          <HotspotsOverlay onSelectPart={setSelectedPart} selectedPart={selectedPart} />
+        </div>
+      </div>
 
       {/* HTML Scroll Sections */}
       <div className="relative z-10 w-full sequence-container pointer-events-none">
@@ -99,9 +109,9 @@ function App() {
                   <span className="text-sm font-black tracking-widest text-blue-900 uppercase">Vision System Active</span>
                 </motion.div>
 
-                <h1 className="text-7xl md:text-8xl lg:text-9xl font-heading font-black tracking-tighter mb-6 flex flex-col md:flex-row gap-4 items-center drop-shadow-[0_4px_25px_rgba(0,0,0,0.5)]">
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Next-Gen</span>
-                  <span className="text-white">Security</span>
+                <h1 className="text-7xl md:text-8xl lg:text-9xl font-heading font-black tracking-tighter mb-6 flex flex-col md:flex-row gap-4 items-center drop-shadow-[0_4px_25px_rgba(0,0,0,0.8)]">
+                  <span className="bg-gradient-to-b from-zinc-100 via-zinc-300 to-zinc-600 bg-clip-text text-transparent">Next-Gen</span>
+                  <span className="bg-gradient-to-b from-slate-200 via-slate-400 to-slate-700 bg-clip-text text-transparent">Security</span>
                 </h1>
                 
                 <p className="text-2xl md:text-3xl text-slate-100 font-bold mb-16 max-w-3xl leading-relaxed drop-shadow-[0_4px_15px_rgba(0,0,0,0.5)]">

@@ -9,38 +9,21 @@ export default function UIOverlay({ part, onClose }) {
 
   // Smart horizontal positioning to prevent clipping
   let horizontalStyle = {};
-  let arrowStyle = {};
-  if (leftPos > 60) {
-    horizontalStyle = { right: '50%', marginRight: '-2rem' };
-    arrowStyle = { right: '1rem' };
-  } else if (leftPos < 40) {
-    horizontalStyle = { left: '50%', marginLeft: '-2rem' };
-    arrowStyle = { left: '1rem' };
+  if (leftPos > 50) {
+    // For parts on the right side of the screen, show card on their left
+    horizontalStyle = { right: '70%', marginRight: '1rem' };
   } else {
-    horizontalStyle = { left: '50%', transform: 'translateX(-50%)' };
-    arrowStyle = { left: '50%', transform: 'translateX(-50%)' };
+    // For parts on the left side of the screen, show card on their right
+    horizontalStyle = { left: '70%', marginLeft: '1rem' };
   }
 
-  // Smart vertical positioning to prevent clipping
-  let verticalStyle = {};
-  if (topPos < 50) {
-    // Place below
-    verticalStyle = { top: '100%', marginTop: '1rem' };
-    arrowStyle.top = '-0.5rem';
-    arrowStyle.borderTop = '1px solid rgba(255,255,255,0.2)';
-    arrowStyle.borderLeft = '1px solid rgba(255,255,255,0.2)';
-  } else {
-    // Place above
-    verticalStyle = { bottom: '100%', marginBottom: '1rem' };
-    arrowStyle.bottom = '-0.5rem';
-    arrowStyle.borderBottom = '1px solid rgba(255,255,255,0.2)';
-    arrowStyle.borderRight = '1px solid rgba(255,255,255,0.2)';
-  }
+  // Vertically center the card relative to the massive hitbox
+  let verticalStyle = { top: '50%', transform: 'translateY(-50%)' };
 
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8, y: topPos < 50 ? -10 : 10 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
+      animate={{ opacity: 1, scale: 1.25, y: 0 }}
       exit={{ opacity: 0, scale: 0.8, y: topPos < 50 ? -10 : 10 }}
       transition={{ type: 'spring', damping: 25, stiffness: 300 }}
       className="absolute z-50 pointer-events-auto"
@@ -51,11 +34,7 @@ export default function UIOverlay({ part, onClose }) {
       onClick={(e) => e.stopPropagation()}
     >
       <div className="relative w-80 bg-slate-900/95 backdrop-blur-3xl border border-white/20 rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-        {/* The little pointer arrow */}
-        <div 
-          className="absolute w-4 h-4 bg-slate-900/95 backdrop-blur-3xl rotate-45 z-[-1]"
-          style={arrowStyle}
-        ></div>
+        {/* We remove the tiny pointer arrow since the card now elegantly floats next to the entire part */}
         
         <button 
           onClick={onClose} 

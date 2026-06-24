@@ -30,7 +30,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  @apply bg-[#FAFAFA] text-slate-800;
+  @apply bg-[#050505] text-white;
 }
 
 #root {

@@ -31,24 +31,29 @@ export default function ImageSequence() {
       const img = imagesRef.current[currentFrame];
       
       if (img && img.complete) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        // Fill the canvas with pure black (matching the GIF background) to prevent any visible cutoff seams
+        context.fillStyle = "#000000";
+        context.fillRect(0, 0, canvas.width, canvas.height);
         
         // Calculate aspect ratio to perfectly fit and cover the screen
         const canvasRatio = canvas.width / canvas.height;
         const imgRatio = img.width / img.height;
+        
+        // Scale the camera image down by 20% as requested
+        const scale = 0.8;
         let drawWidth, drawHeight, offsetX, offsetY;
 
         if (canvasRatio > imgRatio) {
-          drawWidth = canvas.width;
-          drawHeight = canvas.width / imgRatio;
-          offsetX = 0;
-          offsetY = (canvas.height - drawHeight) / 2;
+          drawWidth = canvas.width * scale;
+          drawHeight = (canvas.width / imgRatio) * scale;
         } else {
-          drawWidth = canvas.height * imgRatio;
-          drawHeight = canvas.height;
-          offsetX = (canvas.width - drawWidth) / 2;
-          offsetY = 0;
+          drawWidth = (canvas.height * imgRatio) * scale;
+          drawHeight = canvas.height * scale;
         }
+
+        // Center the scaled image
+        offsetX = (canvas.width - drawWidth) / 2;
+        offsetY = (canvas.height - drawHeight) / 2;
 
         context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
       }
@@ -138,7 +143,7 @@ export default function ImageSequence() {
   return (
     <canvas 
       ref={canvasRef} 
-      className="fixed inset-0 w-full h-full z-0 pointer-events-none"
+      className="absolute inset-0 w-full h-full z-0 pointer-events-none"
     />
   );
 }
