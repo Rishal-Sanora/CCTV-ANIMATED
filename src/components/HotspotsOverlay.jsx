@@ -100,7 +100,6 @@ export default function HotspotsOverlay({ onSelectPart, selectedPart }) {
       });
       tl.to(containerRef.current, {
         scale: 1.05,
-        rotation: 2,
         ease: "power2.inOut",
         duration: 1.5
       }, 0);
@@ -109,7 +108,6 @@ export default function HotspotsOverlay({ onSelectPart, selectedPart }) {
       // Implicitly handled by starting Phase 3 at 2.3
       tl.to(containerRef.current, {
         scale: 1.15,
-        rotation: 6,
         ease: "power1.inOut",
         duration: 0.8
       }, 1.5);
@@ -123,7 +121,6 @@ export default function HotspotsOverlay({ onSelectPart, selectedPart }) {
       });
       tl.to(containerRef.current, {
         scale: 1,
-        rotation: 0,
         ease: "power2.inOut",
         duration: 1.5
       }, 2.3);
@@ -143,10 +140,12 @@ export default function HotspotsOverlay({ onSelectPart, selectedPart }) {
             e.stopPropagation();
             onSelectPart(part);
           }}
-          className="absolute w-12 h-12 sm:w-16 sm:h-16 -translate-x-1/2 -translate-y-1/2 rounded-full cursor-pointer pointer-events-auto border-2 border-transparent hover:border-blue-500/50 transition-colors bg-blue-500/0 hover:bg-blue-500/10 flex flex-col items-center justify-center"
+          className="absolute w-24 h-24 sm:w-32 sm:h-32 -translate-x-1/2 -translate-y-1/2 rounded-full cursor-pointer pointer-events-auto flex flex-col items-center justify-center group"
         >
-          {/* Invisible click target / optional visual indicator */}
-          
+          {/* Extremely subtle, elegant premium indicator */}
+          <div className="w-6 h-6 rounded-full border border-white/20 bg-white/5 backdrop-blur-md transition-all duration-500 ease-out group-hover:scale-[1.5] group-hover:border-white/60 group-hover:bg-white/10 flex items-center justify-center">
+            <div className="w-1 h-1 rounded-full bg-white/40 group-hover:bg-white/80 transition-colors duration-500"></div>
+          </div>
           <AnimatePresence>
             {selectedPart?.id === part.id && (
               <UIOverlay part={part} onClose={(e) => {

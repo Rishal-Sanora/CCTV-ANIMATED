@@ -101,19 +101,17 @@ export default function ImageSequence() {
       // Also scale up canvas slightly during Phase 1
       .to(canvasRef.current, {
         scale: 1.05,
-        rotation: 2,
         ease: "power2.inOut",
         duration: 1.5
       }, 0)
 
-      // Phase 2: Hold exploded view, but add gentle continuous rotation/scale
+      // Phase 2: Hold exploded view, but add gentle continuous scale
       .to(sequence.current, {
         frame: frames.length - 1,
         duration: 0.8
       }, 1.5)
       .to(canvasRef.current, {
         scale: 1.15,
-        rotation: 6,
         ease: "power1.inOut",
         duration: 0.8
       }, 1.5)
@@ -126,7 +124,6 @@ export default function ImageSequence() {
       }, 2.3)
       .to(canvasRef.current, {
         scale: 1,
-        rotation: 0,
         ease: "power2.inOut",
         duration: 1.5
       }, 2.3);
